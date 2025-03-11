@@ -1,0 +1,9 @@
+---
+title: "About"
+---
+
+This website offers access to well-documented R scripts that facilitate the replication of analyses from our study.
+
+In this study, we investigated the impact of increasing white spot severity on maize yield. For this, we analyzed 27 studies conducted by the National Cooperative Research Network on white spot and employed two approaches to assess this association: the random-effects meta-analytic model and the mixed-effects model. Additionally, we incorporated potential moderator variables into the mixed-effects model that may influence this relationship. These results provide valuable insights for optimizing disease control strategies, minimizing yield reductions, and supporting informed decision-making in maize production.
+
+![](images/Post para Facebook Atenção Não leia as letras pequenas moderno vermelho preto e branco.png){fig-align="center"}

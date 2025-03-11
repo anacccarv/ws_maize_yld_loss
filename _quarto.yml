@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Severity-yield relationship for white spot in maize"
+  navbar:
+    left:
+      - href: index.qmd
+        text: ""
+      - href: about.qmd
+        text: "Data Analysis"
+
+format:
+  html:
+    theme: Minimalist
+    css: styles.css
+    toc: true
+    
+editor: visual
+
