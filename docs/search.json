@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About",
+    "title": "Severity-yield relationship for white spot in maize",
     "section": "",
     "text": "This website offers access to well-documented R scripts that facilitate the replication of analyses from our study.\nIn this study, we investigated the impact of increasing white spot severity on maize yield. For this, we analyzed 27 studies conducted by the National Cooperative Research Network on white spot and employed two approaches to assess this association: the random-effects meta-analytic model and the mixed-effects model. Additionally, we incorporated potential moderator variables into the mixed-effects model that may influence this relationship. These results provide valuable insights for optimizing disease control strategies, minimizing yield reductions, and supporting informed decision-making in maize production."
   },
@@ -21,11 +21,11 @@
     "text": "Data distribution\n\nmb_mean |&gt; \n  summary()\n\n      cod             ano            trat          mean_sev      \n Min.   : 1.00   Min.   :2016   Min.   : 1.00   Min.   : 0.2275  \n 1st Qu.: 8.00   1st Qu.:2018   1st Qu.:17.00   1st Qu.: 2.7563  \n Median :14.00   Median :2020   Median :25.00   Median : 8.7000  \n Mean   :14.28   Mean   :2020   Mean   :25.64   Mean   :10.5945  \n 3rd Qu.:21.00   3rd Qu.:2020   3rd Qu.:32.00   3rd Qu.:15.3333  \n Max.   :27.00   Max.   :2023   Max.   :55.00   Max.   :64.5000  \n    mean_yld       median_sev      median_prod   \n Min.   : 3614   Min.   : 0.225   Min.   : 3661  \n 1st Qu.: 5754   1st Qu.: 2.643   1st Qu.: 5749  \n Median : 6706   Median : 8.575   Median : 6715  \n Mean   : 6979   Mean   :10.576   Mean   : 6991  \n 3rd Qu.: 8016   3rd Qu.:15.938   3rd Qu.: 8090  \n Max.   :11056   Max.   :63.500   Max.   :11156  \n\ndist_sev &lt;- mb_mean |&gt; \n  ggplot(aes(mean_sev)) +\n  geom_histogram(binwidth = 3, fill = \"grey85\", color = \"black\", size = 1) +\n  theme_minimal_hgrid() +\n  labs(x = \"Severity (%)\", y = \"\") +\n  scale_y_continuous(limits = c(0, 80), breaks = c(seq(0, 80, by = 20), 80)) +\n  geom_vline(xintercept = 10.5945, size = 1.5, linetype = 2)\n\ndist_yld &lt;- mb_mean |&gt; \n  ggplot(aes(mean_yld)) +\n  geom_histogram(fill = \"grey85\", color = \"black\", linewidth = 1)+\n  theme_minimal_hgrid() +\n  labs(x = \"Yield (kg/ha)\", y = \"\") +\n  geom_vline(xintercept = 6978.94, size = 1.5, linetype = 2)"
   },
   {
-    "objectID": "about.html#boxplots-year",
-    "href": "about.html#boxplots-year",
+    "objectID": "about.html#boxplots",
+    "href": "about.html#boxplots",
     "title": "Data Analysis",
-    "section": "Boxplots year",
-    "text": "Boxplots year\n\nbox_sev &lt;- mb_mean |&gt; \n  ggplot(aes(factor(ano), mean_sev)) +\n  geom_boxplot(outlier.shape = NA, fill = \"grey85\", color = \"black\") +\n  theme_minimal_hgrid() +\n  labs(x = \"Year\", y = \"\")\n\nbox_yld &lt;- mb_mean |&gt; \n  ggplot(aes(factor(ano), mean_yld)) +\n  geom_boxplot(outlier.shape = NA, fill = \"grey85\", color = \"black\") +\n  theme_minimal_hgrid() +\n  labs(x = \"Year\", y = \"\") \n\n\n(dist_sev | box_sev)/\n(dist_yld | box_yld) +\n  plot_annotation(tag_levels = \"A\") # Etiquetar gráficos A,B,C..."
+    "section": "Boxplots",
+    "text": "Boxplots\n\nbox_sev &lt;- mb_mean |&gt; \n  ggplot(aes(factor(ano), mean_sev)) +\n  geom_boxplot(outlier.shape = NA, fill = \"grey85\", color = \"black\") +\n  theme_minimal_hgrid() +\n  labs(x = \"Second crop season\", y = \"\")\n\nbox_yld &lt;- mb_mean |&gt; \n  ggplot(aes(factor(ano), mean_yld)) +\n  geom_boxplot(outlier.shape = NA, fill = \"grey85\", color = \"black\") +\n  theme_minimal_hgrid() +\n  labs(x = \"Second crop season\", y = \"\") \n\n\n(dist_sev | box_sev)/\n(dist_yld | box_yld) +\n  plot_annotation(tag_levels = \"A\") # Etiquetar gráficos A,B,C..."
   },
   {
     "objectID": "about.html#individual-regresions",

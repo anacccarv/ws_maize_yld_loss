@@ -91,20 +91,20 @@ dist_yld <- mb_mean |>
   geom_vline(xintercept = 6978.94, size = 1.5, linetype = 2)
 ```
 
-## Boxplots year
+## Boxplots
 
 ```{r}
 box_sev <- mb_mean |> 
   ggplot(aes(factor(ano), mean_sev)) +
   geom_boxplot(outlier.shape = NA, fill = "grey85", color = "black") +
   theme_minimal_hgrid() +
-  labs(x = "Year", y = "")
+  labs(x = "Second crop season", y = "")
 
 box_yld <- mb_mean |> 
   ggplot(aes(factor(ano), mean_yld)) +
   geom_boxplot(outlier.shape = NA, fill = "grey85", color = "black") +
   theme_minimal_hgrid() +
-  labs(x = "Year", y = "") 
+  labs(x = "Second crop season", y = "") 
 ```
 
 ```{r}
