@@ -110,7 +110,7 @@ box_yld <- mb_mean |>
 ```{r}
 (dist_sev | box_sev)/
 (dist_yld | box_yld) +
-  plot_annotation(tag_levels = "A") # Etiquetar gráficos A,B,C...
+  plot_annotation(tag_levels = "A")
 
 ```
 
@@ -274,7 +274,7 @@ b1 <- fit_all |>
 ```{r}
 (r|z)/
 (b0|b1) +
-  plot_annotation(tag_levels = "A") # Etiquetar gráficos A,B,C...
+  plot_annotation(tag_levels = "A") 
 
 ```
 
@@ -401,25 +401,25 @@ summary(rc1)
 ```
 
 ```{r}
-# Extraindo a variância dos efeitos aleatórios
+# Extracting variance from random effects
 random_effects_variance <- VarCorr(rc1)
 
-# Acessando a matriz de variância/covariância do grupo 'cod'
+# Accessing the variance/covariance matrix of the 'cod' group
 var_random_effects <- random_effects_variance$cod
 
-# Variância residual (erro)
+# Residual variance (error)
 sigma2 <- sigma(rc1)^2
 
-# τ² (variância dos efeitos aleatórios)
-# A variância do intercepto está na primeira linha e coluna
+# τ² (variance of random effects)
+# The variance of the intercept is in the first row and column
 var_intercept <- var_random_effects[1, 1]
 
-# A variância do slope está na segunda linha e coluna
+# The slope variance is in the second row and column
 var_slope <- var_random_effects[2, 2]
 
-# Calcular I²
-tau2 <- var_intercept + var_slope  # Variância total dos efeitos aleatórios
-I2 <- (tau2 / (tau2 + sigma2)) * 100  # Cálculo de I²
+# Calculate I²
+tau2 <- var_intercept + var_slope  # Total variance of random effects
+I2 <- (tau2 / (tau2 + sigma2)) * 100  # Calculation of I²
 I2
 
 ```
@@ -427,7 +427,7 @@ I2
 ## CI 95%
 
 ```{r}
-confint(rc1, method = "profile")  # Intervalo baseado no perfil de verossimilhança (mais robusto)
+confint(rc1, method = "profile")  # Interval based on likelihood profile
 ```
 
 ```{r}
@@ -473,7 +473,7 @@ mixed <- ggplot() +
 
 ```{r}
 (meta|mixed) +
-  plot_annotation(tag_levels = "A") # Tag graph A,B,C...
+  plot_annotation(tag_levels = "A")
 
 ```
 
@@ -522,7 +522,7 @@ print(median_value)
 
 edt3 <- ggplot(surface, aes(x = econ_tresh2)) +
   stat_halfeye(aes(fill = after_stat(x)), line = "black", alpha = 0.95) +
-  scale_fill_viridis_c(option = "plasma") +  # Substitua "inferno" pela opção que combina com a b
+  scale_fill_viridis_c(option = "plasma") +  
   labs(x = "Economic Damage Threshold (EDT)", y = "Density", fill = "EDT") +
   theme_minimal(base_size = 16)+
   theme(axis.text.x = element_text(size = 13),   
