@@ -6,6 +6,8 @@ warning: false
 
 # Library
 
+First, let's load the required packages:
+
 ```{r}
 library(bulkreadr)
 library(tidyverse)
@@ -27,6 +29,8 @@ library(simr)
 
 # Data importantion
 
+Now, let’s load the dataset we’re going to work with:
+
 ```{r}
 mb <- read_excel("data/full_data.xlsx")
 
@@ -36,7 +40,11 @@ sev_dif <- mb |>
   summarize(sev_max = max(sev, na.rm = TRUE),
             sev_min = min(sev, na.rm = TRUE),
             sev_difference = sev_max - sev_min)
+```
 
+For the analysis, we need to remove the trials that do not have data on yield or disease severity. Also, studies in which the difference between maximum and minimum severity was less than 5% were excluded from the analysis.
+
+```{r}
 mb2 <- mb |> 
   filter(!is.na(prod), !is.na(sev)) |> 
   filter(ensaio_1 != 26) |> 
@@ -50,11 +58,11 @@ mb2$ensaio_1 <- as.integer(factor(mb2$ensaio_1, levels = unique(mb2$ensaio_1)))
 mb2 <- mb2 |> 
   rename(cod = ensaio_1) |> 
   mutate(regiao = (as.factor(regiao)))
-
 ```
 
 # Data visualization
 
+In this step, we explore and assess the distribution of the data.
 ```{r}
 mb_mean <- mb2 |> 
   group_by(cod, ano, trat) |> 
@@ -116,6 +124,8 @@ box_yld <- mb_mean |>
 
 ## Individual regresions
 
+Then, we estimate the linear regressions for each study in order to generally examine the relationship between disease severity and maize yield.
+
 ```{r}
 mb_mean |> 
   ggplot(aes(mean_sev, mean_yld))+
@@ -131,6 +141,8 @@ mb_mean |>
 ```
 
 # Meta-analytic models
+
+For the meta-analysis, we first examine the correlation between the independent variable (severity) and the dependent variable (yield).
 
 ## Correlation
 
@@ -210,6 +222,8 @@ z <- correlation_data %>%
 ```
 
 ## Random effects models
+
+Then, we perform the actual random-effects meta-analysis.
 
 ```{r}
 # individual regressions
@@ -305,11 +319,15 @@ meta
 
 ## Coefficient damage
 
+Based on the average intercept and slope estimated in the meta-analysis, we calculated the damage coefficient of the disease.
+
 ```{r}
 -60.2210/7616.6131*100
 ```
 
 # Moderators
+
+To explain, at least in part, the observed heterogeneity, we added potential moderator variables to the model, such as yield class, severity class, and region.
 
 ```{r}
 mb2 |> 
@@ -393,6 +411,8 @@ summary(mb_mod6)
 ```
 
 # Mixed model
+
+For comparison purposes, we also estimated the intercept and slope for the linear relationship between white spot severity and maize yield using a mixed-effects model.
 
 ```{r}
 rc1 <- lmer(prod ~ sev + (sev |cod), data = mb2, 
@@ -479,12 +499,16 @@ mixed <- ggplot() +
 
 ## Coefficient damage
 
+Using the intercept and slope estimated by the mixed-effects model, we also calculated the damage coefficient.
+
 ```{r}
 #mixed-models
 -58.690/7689.656*100
 ```
 
 # EDT
+
+Finally, we calculated the economic damage threshold (EDT).
 
 ```{r}
 cost = seq(15, 45,length.out = 200)
