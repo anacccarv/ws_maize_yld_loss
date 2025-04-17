@@ -63,6 +63,7 @@ mb2 <- mb2 |>
 # Data visualization
 
 In this step, we explore and assess the distribution of the data.
+
 ```{r}
 mb_mean <- mb2 |> 
   group_by(cod, ano, trat) |> 
